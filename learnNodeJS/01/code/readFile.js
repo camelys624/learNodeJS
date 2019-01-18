@@ -31,5 +31,9 @@ fs.readFile('./data/hello.txt', function (err, data) {
     // 这里看到的是二进制转换为16进制了
     // 无论是二进制还是16进制，人类都无法识别
     // 所以我们可以通过toString方法把其转为我们能认识的数据
-    console.log(data.toString());
+    if(err){
+        console.log('读取文件失败');
+    }else {
+        console.log(data.toString());
+    }
 })
