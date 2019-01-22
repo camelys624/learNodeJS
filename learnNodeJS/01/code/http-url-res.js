@@ -16,19 +16,33 @@ server.on('request', function (req, res) {
     //  也就是说所有的url都是以/开头的
     // 2. 判断路径处理响应
 
-    var url = req.url;
+    const url = req.url;
 
-    if (url === '/'){
-       res.end('index page');
-    } else if (url === '/login') {
-        res.end('login page');
-    } else {
-        res.end('404 Not Found');
+    // if (url === '/'){
+    //    res.end('index page');
+    // } else if (url === '/login') {
+    //     res.end('login page');
+    // } else {
+    //     res.end('404 Not Found');
+    // }
+
+    if(url === '/product') {
+        const product = [
+            {name: '苹果', price: 8848},
+            {name: '梨子', price: 8848},
+            {name: '橙子', price: 8848},
+            {name: '菠萝', price: 8848},
+            {name: '辣椒', price: 8848},
+        ];
+
+        // 响应内容必须是二进制数据或者字符串
+        // 数字、对象、数组、布尔值都不可以
+        res.end(JSON.stringify(product));
     }
-
-})
+});
 
 // 3. 绑定端口号，启动服务
 server.listen(3000, function () {
     console.log('服务启动成功了');
-})
+});
+
