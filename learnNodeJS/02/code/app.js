@@ -4,6 +4,42 @@
 
 const http = require('http');
 const fs = require('fs');
+const url = require('url');
+const template = require('art-template');
+
+let comments = [
+    {
+        name: '张三',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+    {
+        name: '张三1',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+    {
+        name: '张三2',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+    {
+        name: '张三3',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+    {
+        name: '张三5',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+    {
+        name: '张三6',
+        message: '今天天气不错',
+        dateTime: '2015-10-16'
+    },
+];
+
 
 const server = http.createServer();
 
@@ -14,7 +50,10 @@ server.on('request', function (req, res) {
            if (err) {
               return res.end('404 not fond');
            }
-           res.end(data);
+           const htmlStr = template.render(data.toString(),{
+               comments
+           });
+           res.end(htmlStr);
 
        })
    } else if (url.indexOf('/public/') === 0 || url.indexOf('/node_modules') === 0) {
@@ -26,6 +65,13 @@ server.on('request', function (req, res) {
            }
            res.end(data)
 
+       })
+   } else if(url === '/post'){
+       fs.readFile('./views/post.html', function (err, data) {
+           if(err) {
+               return res.end('404 not found');
+           }
+           res.end(data);
        })
    } else {
        fs.readFile('./views/404.html', function (err, data) {

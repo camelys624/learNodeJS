@@ -9,12 +9,17 @@
 <div class="header container">
     <div class="page-header">
         <h1>Example page header <small>Subtext for header</small></h1>
-        <a class="btn btn-success" href="post.html">发表留言</a>
+        <a class="btn btn-success" href="post">发表留言</a>
     </div>
 </div>
 <div class="comments container">
     <ul class="list-group">
-        <li class="list-group-item">Cras justo odio</li>
+        {{each comments}}
+        <li class="list-group-item">
+            {{ $value.name }}说: {{ $value.message }}
+            <span class="float-right">{{ $value.dateTime }}</span>
+        </li>
+        {{/each}}
     </ul>
 </div>
 </body>
