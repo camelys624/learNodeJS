@@ -1,9 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 
 const app = express();
 
 app.use('/public/', express.static('./public'));
 app.use('/node_modules/', express.static('./node_modules'));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
 
 // 配置使用 art-template 模板引擎，具体去官网看
 // 第一个参数表示，当渲染以 .art 结尾的文件的时候，使用 art-template 模板引擎
@@ -63,6 +70,22 @@ app.get('/post', function (req, res) {
     res.render('post.html')
 });
 
+app.get('/home', function (req, res) {
+    // readFile 的第二个参数是可选的，传入 utf8 就是告诉它把读取到的文件直接按照 utf8 的方式编码
+    // 除了这样来转换之外，也可以通过 data.toString() 的方式
+    fs.readFile('./db.json', 'utf8', function (err, data) {
+       if (err) {
+           return res.status(500).send('Server error.');
+           // res.render('404.html');
+       }else {
+           res.render('home.html', {
+               students: JSON.parse(data).student
+           })
+           // console.log(data);
+       }
+    });
+});
+
 // app.get('/msg', function (req, res) {
 //     // res.send('post');
 //     const comment = req.query;
@@ -81,6 +104,10 @@ app.post('/post', function (req, res) {
     // 3. 发送响应
 
     // req.query只能拿 get 请求的参数
+    const comment = req.body;
+    comment.dateTime = (new Date()).toLocaleDateString();
+    comments.unshift(comment);
+    // console.log(req.body);
     res.redirect('/');  // express 自带API
 });
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加新的学生</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+<div class="container">
+    <form action="/students/new" method="post">
+        <div class="form-group">
+            <label>姓名：</label>
+            <input type="text" class="form-control" name="name" placeholder="姓名" />
+        </div>
+        <div class="form-group">
+            <label>性别：</label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="0">男
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="1">女
+            </label>
+        </div>
+        <div class="form-group">
+            <label>年龄：</label>
+            <input type="number" class="form-control" name="age" placeholder="18"/>
+        </div>
+        <div class="form-group">
+            <label>爱好：</label>
+            <input type="text" class="form-control" name="hobbies" placeholder="爱好" />
+        </div>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+</div>
+</body>
+</html>

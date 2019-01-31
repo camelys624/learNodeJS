@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+<div class="page-header">
+    <h1>Example page header <small>Subtext for header</small></h1>
+    <a class="btn btn-success" href="post">发表留言</a>
+</div>
+<hr />
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>爱好</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ each students }}
+            <tr>
+                <td>{{ $value.id }}</td>
+                <td>{{ $value.name }}</td>
+                <td>{{ $value.gender }}</td>
+                <td>{{ $value.age }}</td>
+                <td>{{ $value.hobbies }}</td>
+            </tr>
+            {{ /each }}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
